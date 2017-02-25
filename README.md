@@ -1,6 +1,6 @@
 # ezpwdgen
 
-Is a deterministic offline password generator that creates passwords that are [easy to remember](https://xkcd.com/936/).
+Is a deterministic offline password generator that creates passwords that are [easy to remember](https://xkcd.com/936/) by using a master password.
 
 It does this using either the [EFF word list](https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases) or the Unicode [Emoji Annotation keyword database](http://unicode.org/emoji/charts/emoji-annotations.html) (Currently the Emoji one is hard coded).
 
@@ -38,7 +38,7 @@ profile1   password1
 profile2   password2
 ```
 
-The profiles basically allow for multiple passwords.
+The profiles basically allow for multiple master passwords.
 
 
 When you run the command `ezpwdgen.py` if no profile is picked the first one in the config file is picked.
@@ -55,8 +55,9 @@ While I'm sure the EFF database is superior security wise (as well as it can be 
 
 The emoji annotaitons also allows for some interesting internationalization of which the EFF database does not provide.
 
-## Caveat
+## Caveats
 
-**I am not a security expert... please send PRs! Use this at your own risk!**
-
-Do not use this to create offline passwords. While this method is probably fine for online passwords as it is generally fairly difficult to brute force online passwords this method is probably not ideal for offline things.
+* Do not share your master passwords (the passwords in the config file) unless you want to share passwords with that entity.
+* Do not share the config file. Store that safely like you would SSH private keys.
+* Do not use this to create offline passwords. While this method is probably fine for online passwords as it is generally fairly difficult to brute force online passwords this method is probably not ideal for offline things.
+* **I am not a security expert... please send PRs! Use this at your own risk!**
