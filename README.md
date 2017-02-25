@@ -53,7 +53,7 @@ There are also lots of nondeterministic password generators (using the OS secure
 
 While I'm sure the EFF database is superior security wise (as well as it can be used with out a computer) I prefer the passwords generated from the emoji word database. The emoji annotations also provides a nifty way to potentially help remember the passwords by showing emojis. Right now the program doesn't do this but plans are to add this as many terminals (iterm) actually support printing emojis.
 
-The emoji annotaitons also allows for some interesting internationalization of which the EFF database does not provide.
+The emoji annotations also allows for some interesting internationalization of which the EFF database does not provide.
 
 ## Caveats
 
