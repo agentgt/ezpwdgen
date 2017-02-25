@@ -2,7 +2,7 @@
 
 Is a deterministic offline password generator that creates passwords that are [easy to remember](https://xkcd.com/936/).
 
-It does this using either the [EFF word list](https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases) or the Unicode [Emoji Annotation keyword database](http://unicode.org/emoji/charts/emoji-annotations.html).
+It does this using either the [EFF word list](https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases) or the Unicode [Emoji Annotation keyword database](http://unicode.org/emoji/charts/emoji-annotations.html) (Currently the Emoji one is hard coded).
 
 This allows you to create unique passwords for various sites with out having to share the same password and without storing the created passwords.
 
@@ -34,12 +34,11 @@ The configuration is space/tab delimited file in `~/.config/ezpwdgen/config`.
 The format is:
 
 ```
-profile1		password1
-profile2    password2
+profile1   password1
+profile2   password2
 ```
 
 The profiles basically allow for multiple passwords.
-
 
 
 When you run the command `ezpwdgen.py` if no profile is picked the first one in the config file is picked.
@@ -49,6 +48,12 @@ When you run the command `ezpwdgen.py` if no profile is picked the first one in 
 Well there are lots deterministic password generators but they are either online or do not use common words to create passwords.
 
 There are also lots of nondeterministic password generators (using the OS secure random) that create passwords with words but they are nondeterministic (aka no master password).
+
+## What is with the Emoji word database
+
+While I'm sure the EFF database is superior security wise (as well as it can be used with out a computer) I prefer the passwords generated from the emoji word database. The emoji annotations also provides a nifty way to potentially help remember the passwords by showing emojis. Right now the program doesn't do this but plans are to add this as many terminals (iterm) actually support printing emojis.
+
+The emoji annotaitons also allows for some interesting internationalization of which the EFF database does not provide.
 
 ## Caveat
 
