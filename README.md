@@ -86,14 +86,19 @@ There are also lots of nondeterministic password generators (using the OS secure
 random) that create passwords with words but they are nondeterministic (aka no
 master password).
 
-There are also many password managers like [pass](https://www.passwordstore.org/) 
-and [keepass](http://keepass.info/). While I have great respect for those tools they are more 
-complicated, require you to synchronize across machines and difficult to share passwords with other people.
+There are also many password managers like
+[pass](https://www.passwordstore.org/) and [keepass](http://keepass.info/).
+While I have great respect for those tools they are more complicated, require
+you to synchronize across machines and difficult to share passwords with other
+people. Also for some reason many of the password managers still do not generate
+easy to remember passwords. Consequently people copy and paste the generated
+password over and over. The clipboard is an easy attack vector. Don't use it.
 
 With deterministic password generators you only need to share the master
-password and this program (and the words file) with someone else.
+password and this program (and the words file) with someone else. Consequently
+**this password generator is stateless and will never modify or save files!**
 
-Consequently **this password generator is stateless and will never modify or save files!**
+Finally (but yet again) this script urges you not to copy and paste passwords.
 
 ## What is with the Emoji word database
 
@@ -109,17 +114,21 @@ which the EFF database does not provide.
 
 ## Hey this site doesn't like long passwords or requires weird characters
 
-You can make up little rules like truncating the password, capitalizing the first word and suffixing or prefixing with some symbols.
-That is infact what the notes section is for in the config file.
+You can make up little rules like truncating the password, capitalizing the
+first word and suffixing or prefixing with some symbols. That is infact what the
+notes section is for in the config file.
 
-Truncating is pretty easy for most HTML forms. Just type the password till you can't type anymore usually works. 
+Truncating is pretty easy for most HTML forms. Just type the password till you
+can't type anymore usually works.
 
-By the way if you use a site that has a limit less than 32 characters for a password I recommend complaining to them.
+By the way if you use a site that has a limit less than 32 characters for a
+password I recommend complaining to them.
 
 ## Caveats
 
 * Do not share your master passwords (the passwords in the config file) unless you want to share passwords with that entity.
 * Do not share the config file. Store that safely like you would SSH private keys.
+* **Do not copy and paste the generated password!** The clipboard on most operating systems is disturbingly insecure.
 * Do not use this to create offline passwords. While this method is probably
   fine for online passwords as it is generally fairly difficult to brute force
   online passwords this method is probably not ideal for offline things.
