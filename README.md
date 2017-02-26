@@ -18,7 +18,7 @@ people reusing passwords.
 
 The algorithim used can easily be examined as it is just a python script. 
 The script generates a secure hash (SHA-512 HMAC with 10000 iterations) and from that hash creates integers
-which are then used to pick words from the word file (modulas the number of words file).
+which are then used to pick words from the word file (modulas the number of words in the file).
 
 ## Requirements
 
@@ -59,17 +59,17 @@ The profiles basically allow for multiple master passwords.
 
 When you run the command `ezpwdgen.py` if no profile is picked the first one in the config file is picked.
 
-### Using GPG
+### Using GnuPGP
 
-Some users may want to encrypt their configuration file with GPG. 
-While I recommend it GPG is nontrival for most.
+Some users may want to encrypt their configuration file with GnuPGP. 
+While I recommend it `gpg` is nontrival for most.
 
 Currently there are two options:
 
 * Pipe the config file after it has been decrypted using `-c -`
 * Use the experimental builtin GPG support with "-d" argument but this requires gpg-agent to be setup properly. 
 
-For the first option there is a script that makes this easier called `ezpwdgengpg.sh`.
+For the first option there is a wrapping script that makes this easier called `ezpwdgengpg.sh`.
 It will expect an encrypted config file in the following location `~/.config/ezpwdgen/config.gpg`
 
 To create this file you can use the command 
@@ -90,7 +90,10 @@ There are also many password managers like [pass](https://www.passwordstore.org/
 and [keepass](http://keepass.info/). While I have great respect for those tools they are more 
 complicated, require you to synchronize across machines and difficult to share passwords with other people.
 
-With deterministic password generators you only need to share the master password and this program with someone else.
+With deterministic password generators you only need to share the master
+password and this program (and the words file) with someone else.
+
+Consequently **this password generator is stateless and will never modify or save files!**
 
 ## What is with the Emoji word database
 
@@ -101,7 +104,8 @@ remember the passwords by showing emojis. Right now the program doesn't do this
 but plans are to add this as many terminals (iterm) actually support printing
 emojis.
 
-The emoji annotations also allows for some interesting internationalization of which the EFF database does not provide.
+The emoji annotations also allows for some interesting internationalization of
+which the EFF database does not provide.
 
 ## Hey this site doesn't like long passwords or requires weird characters
 
