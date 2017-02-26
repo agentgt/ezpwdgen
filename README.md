@@ -101,7 +101,7 @@ remember the passwords by showing emojis. Right now the program doesn't do this
 but plans are to add this as many terminals (iterm) actually support printing
 emojis.
 
-The emoji annotaitons also allows for some interesting internationalization of which the EFF database does not provide.
+The emoji annotations also allows for some interesting internationalization of which the EFF database does not provide.
 
 ## Hey this site doesn't like long passwords or requires weird characters
 
