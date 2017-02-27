@@ -50,12 +50,15 @@ The format is:
 
 ```
 # a comment
-profile1   password1   optional_notes1
+profile1   password1   optional_wordfile_sha256_checksum   optional_notes1
 profile2   password2
 ```
 
 The profiles basically allow for multiple master passwords.
 
+The third column is the checksum of the word file. Use this if you are concerned
+about the word file changing from version to version which would change the
+predictability of the passwords.
 
 When you run the command `ezpwdgen.py` if no profile is picked the first one in the config file is picked.
 

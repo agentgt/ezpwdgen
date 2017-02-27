@@ -4,15 +4,21 @@ import re
 import imp
 import sys
 import os.path
-from hashlib import pbkdf2_hmac
+import hashlib
 from optparse import OptionParser
 from os.path import expanduser
 
 class WordDB:
-    def __init__(self, wordfile):
+    def __init__(self, wordfile, checksum):
         self.filename = wordfile
+        self.checksum = hashlib.sha256(open(wordfile, 'rb').read()).hexdigest()
+        self.testChecksum(checksum)
         f = open(wordfile, 'r')
         self.lines = f.readlines()
+
+    def testChecksum(self, checksum):
+        if (self.checksum != checksum):
+            raise Exception('File %s sha256: %s expected: %s' % (self.filename, self.checksum, checksum))
 
     def getWord(self,i):
         return self.lines[i].strip()
@@ -31,13 +37,13 @@ class Profile:
 
 notes = 'capitalize_and_suffix_with_@!1'
 #wordfile= EffWordDB('eff_short_wordlist_2_0.txt')
-wordfile= WordDB('emoji/emoji-words-2017-02-v4.txt')
+wordfile= WordDB('emoji/emoji-words-2017-02-v4.txt','9c56069cc3efb4800a106d7d63377546f98db9d8fc2371969c828d97b4c49a7e')
 
-def generateWord(master_password, domain, n):
+def generateWord(wordfile, master_password, domain, n):
     size = len(wordfile)
     #for x in range (0,4):
     nwords = 4
-    data = pbkdf2_hmac('sha512',  master_password + '/' + domain, b'', 100000+n, dklen=nwords * 4)
+    data = hashlib.pbkdf2_hmac('sha512',  master_password + '/' + domain, b'', 100000+n, dklen=nwords * 4)
     words = []
     for x in range(0,nwords):
         bs = data[x*4:((x+1)*4)]
@@ -48,7 +54,9 @@ def generateWord(master_password, domain, n):
 
 def generateWords(profile, domain, iterations):
     for n in iterations:
-        print str(generateWord(profile.password, domain, n))
+        if profile.checksum:
+            profile.wordfile.testChecksum(profile.checksum)
+        print str(generateWord(profile.wordfile, profile.password, domain, n))
 
 def bytes_to_int(bytes):
       return int(bytes.encode('hex'), 16)
@@ -130,9 +138,14 @@ def run():
             parser.error("Profile is malformed in " + configFile + " on line: " + str(lineno))
         profile = Profile(p[0].strip(), p[1].strip())
         if (len(p) > 2):
-            profile.notes = p[2]
+            profile.checksum = p[2]
+        else:
+            profile.checksum = None
+        if (len(p) > 3):
+            profile.notes = p[3]
         else:
             profile.notes = notes
+        profile.wordfile = wordfile
         if not defaultProfile: defaultProfile = profile
         profiles[p[0]] = profile
     profile = None
